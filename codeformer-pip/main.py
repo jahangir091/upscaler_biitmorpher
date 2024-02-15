@@ -1,0 +1,55 @@
+import os
+import uvicorn
+import time
+from PIL import Image
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from codeformer.app import inference_app
+from utils import UpscaleImageRequest, encode_pil_to_base64, save_image
+
+
+app = FastAPI()
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/ai/api/v1/upscaler-server-test")
+def upscaler_server_test():
+    return {"Server is working fine!"}
+
+
+@app.post("/ai/api/v1/upscale")
+def rembg_remove(request:UpscaleImageRequest):
+    stime = time.time()
+    input_image = request.image
+    image_path = save_image(input_image)
+    restored_image_path = inference_app(
+        image=image_path,
+        background_enhance=True,
+        face_upsample=True,
+        upscale=2,
+        codeformer_fidelity=0.5,
+    )
+
+    out_pil_img = Image.open(restored_image_path)
+    upscaled_img_base64 = encode_pil_to_base64(out_pil_img)
+    os.remove(image_path)
+    return {
+        "success": True,
+        "message": "Returned output successfully",
+        "server_process_time": time.time() - stime,
+        "output_image": upscaled_img_base64
+    }
+
+
+if __name__ == '__main__':
+    uvicorn.run(app, host="0.0.0.0", port=8006)
+    # uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
