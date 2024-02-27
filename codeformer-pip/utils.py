@@ -11,8 +11,8 @@ from pydantic import BaseModel, Field
 
 
 def get_img_path():
-    current_dir = os.path.dirname(__file__)
-    img_directory = current_dir + '/.temp/'
+    current_dir = '/tmp'
+    img_directory = current_dir + '/.temp/upscaler_images/'
     os.makedirs(img_directory, exist_ok=True)
     img_file_name = uuid.uuid4().hex[:20] + '.jpg'
     return img_directory + img_file_name

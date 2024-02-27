@@ -25,8 +25,8 @@ from codeformer.facelib.detection.retinaface.retinaface_utils import (
     py_cpu_nms,
 )
 
-# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-device = get_device()
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# device = get_device()
 
 
 def generate_config(network_name):

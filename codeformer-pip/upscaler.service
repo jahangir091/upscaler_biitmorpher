@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn Daemon for FastAPI Upscaler Project
+After=network.target
+
+
+[Service]
+WorkingDirectory=/home/evobits/upscaler_biitmorpher/codeformer-pip
+ExecStartPre=/bin/bash -c 'mkdir -p /run/upscaler; chown www-data:www-data /run/upscaler'
+ExecStart=/home/evobits/upscaler_biitmorpher/codeformer-pip/.venv/bin/gunicorn -c upscaler_gunicorn_conf.py main:app
+
+
+[Install]
+WantedBy=multi-user.target
