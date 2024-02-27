@@ -23,7 +23,7 @@ app.add_middleware(
 
 @app.get("/ai/api/v1/upscaler-server-test")
 def upscaler_server_test():
-    return {"Server is working fine!"}
+    return {"Upscale server is working fine!"}
 
 
 @app.post("/ai/api/v1/upscale")
