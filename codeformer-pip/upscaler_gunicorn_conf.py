@@ -12,6 +12,9 @@ bind = 'unix:/run/upscaler/gunicorn.sock'
 workers = 1
 worker_class = 'uvicorn.workers.UvicornWorker'
 
+# Worker timeout
+timeout = 120
+
 # Logging Options
 loglevel = 'debug'
 accesslog = '/var/log/upscaler/access.log'
