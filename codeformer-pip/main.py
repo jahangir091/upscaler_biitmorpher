@@ -54,7 +54,7 @@ async def upscale_single_image(request: UpscaleImageRequest):
         "success": True,
         "message": "Returned output successfully",
         "server_process_time": time.time() - stime,
-        "output_image_url": 'media/' + restored_image_path.split('/')[-1]
+        "output_image_url": 'media' + '/upscaler_images/' + restored_image_path.split('/')[-1]
     }
 
 
