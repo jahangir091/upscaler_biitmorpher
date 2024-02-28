@@ -30,6 +30,13 @@ def upscaler_server_test():
 async def upscale_single_image(request: UpscaleImageRequest):
     stime = time.time()
     input_image = request.image
+    if not input_image:
+        return {
+            "success": False,
+            "message": "Input image not found",
+            "server_process_time": '',
+            "output_image_url": ''
+        }
     image_path = save_image(input_image)
     restored_image_path = inference_app(
         image=image_path,
