@@ -27,7 +27,7 @@ def upscaler_server_test():
 
 
 @app.post("/ai/api/v1/upscale")
-def upscale_single_image(request:UpscaleImageRequest, request2:Request):
+async def upscale_single_image(request: UpscaleImageRequest):
     stime = time.time()
     input_image = request.image
     image_path = save_image(input_image)
