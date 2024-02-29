@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from codeformer.app import inference_app
 from utils import UpscaleImageRequest, encode_pil_to_base64, save_image
 
-from api_analytics.fastapi import Analytics
+# from api_analytics.fastapi import Analytics
 
 app = FastAPI()
 origins = ["*"]
@@ -20,7 +20,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.add_middleware(Analytics, api_key="a193dd95-c355-43ce-9ec1-7b47d9bf66ec")
+# app.add_middleware(Analytics, api_key="a193dd95-c355-43ce-9ec1-7b47d9bf66ec")
 
 
 
