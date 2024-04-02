@@ -13,7 +13,7 @@ workers = 1
 worker_class = 'uvicorn.workers.UvicornWorker'
 
 # Worker timeout
-timeout = 120
+timeout = 300
 
 # Logging Options
 loglevel = 'debug'
